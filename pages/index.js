@@ -1,5 +1,7 @@
-import {Button} from 'antd';
+import { Button } from 'antd';
+import Link from "next/link";
 import 'antd/dist/antd.css';
+import '../public/styles.css';
 
 export default class Index extends React.Component {
     render() {
@@ -7,7 +9,9 @@ export default class Index extends React.Component {
             <section>
                 <h1>Titre</h1>
                 <p>court paragraphe</p>
-                <Button>Test button</Button>
+                <Link href='/dictionary'>
+                    <Button>Test button</Button>
+                </Link>
             </section>
 
         );
