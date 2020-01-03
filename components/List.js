@@ -13,14 +13,13 @@ const List_ = styled.ul`
 function List({ items = [], lang }) {
     return (
         <List_>
-            {items && items.map((item, i) => <ListItem key={i} {...item} lang={lang} />)}
+            {items && items.map((item, i) => <ListItem key={i} {...item} />)}
         </List_>
     );
 }
 
 List.propTypes = {
     items: propTypes.array.isRequired,
-    lang: propTypes.string
 };
 
 export default React.memo(List);

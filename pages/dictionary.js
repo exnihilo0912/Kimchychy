@@ -5,20 +5,17 @@ import 'antd/dist/antd.css';
 import '../public/styles.css';
 import { dictionnary, languages } from '../Mockup/data';
 import Menu from '../components/Menu';
-import { words, langs, lang } from '../Store/reducers';
+import { words, langs, lang, display } from '../Store/reducers';
 import { A } from '../Store/Actions';
+import { initStorage, updateStorage} from "../Store/LocalStorage";
 
+const STORAGE_NAME = 'K_DICTIONARY';
 const store = createStore(
-    combineReducers({words, lang, langs}),
-    {words: dictionnary, languages}
+    combineReducers({words, lang, langs, display}),
+    initStorage(STORAGE_NAME) || {words: dictionnary, langs: languages, lang: 'en-us'}
 );
 
-const MenuItems = [
-    {text: 'Add', f: () => store.dispatch({type: A.ADD_WORD})},
-    {text: 'Remove All', f: () => store.dispatch({type: A.DELETE_ALL_WORD})},
-    {text: 'Hide Korean', f: () => store.dispatch({type: ''})},
-    {text: 'Hide Translation', f: () => store.dispatch({type: ''})},
-];
+store.subscribe( () => updateStorage(STORAGE_NAME, store.getState()));
 
 export default class Dictionary extends React.Component{
     constructor(props) {
@@ -34,7 +31,7 @@ export default class Dictionary extends React.Component{
             <Provider store={store}>
                 <section>
                     <h1>Dictionnary</h1>
-                    <Menu items={MenuItems}/>
+                    <Menu dispatch={store.dispatch} />
                     <WordList/>
                 </section>
             </Provider>

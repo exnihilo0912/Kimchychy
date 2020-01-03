@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import propTypes from "prop-types";
 import TranslationField from './TranslationField';
+import { connect } from 'react-redux';
 import {Icon} from 'antd';
 
 const ListElem = styled.li`
@@ -33,6 +34,7 @@ const Korean = styled.input`
   padding: 0.2rem 0;
   font-weight: bold;
   font-size: 1rem;
+  visibility: ${props => props.display ? 'visible' : 'hidden'};
 `;
 
 const Opt = styled.div`
@@ -42,13 +44,13 @@ const Opt = styled.div`
   color: dodgerblue;
 `;
 
-function ListItem({ kr, tl = [], lang }) {
+function ListItem({ id, kr, tl = [] }) {
     const [kr_value, updateKrValue] = useState(kr);
 
     return (
         <ListElem>
-            <Korean value={kr_value} onChange={e => updateKrValue(e.target.value) } />
-            <TranslationField tl={tl} lang={lang}/>
+            <CKorean value={kr_value} onChange={e => updateKrValue(e.target.value) } />
+            <TranslationField id={id} tl={tl}/>
             <Opt>1</Opt>
         </ListElem>
     );
@@ -56,7 +58,10 @@ function ListItem({ kr, tl = [], lang }) {
 
 ListItem.propTypes = {
     kr: propTypes.string.isRequired,
+    tl: propTypes.array.isRequired,
     lang: propTypes.string
 };
+
+const CKorean = connect(state => ({display: state.display.kr}))(Korean);
 
 export default React.memo(ListItem);
