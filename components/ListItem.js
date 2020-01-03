@@ -3,6 +3,7 @@ import styled from "styled-components";
 import propTypes from "prop-types";
 import TranslationField from './TranslationField';
 import { connect } from 'react-redux';
+import { editKorean } from "../Store/ActionCreators";
 import {Icon} from 'antd';
 
 const ListElem = styled.li`
@@ -45,11 +46,9 @@ const Opt = styled.div`
 `;
 
 function ListItem({ id, kr, tl = [] }) {
-    const [kr_value, updateKrValue] = useState(kr);
-
     return (
         <ListElem>
-            <CKorean value={kr_value} onChange={e => updateKrValue(e.target.value) } />
+            <CKorean id={id}/>
             <TranslationField id={id} tl={tl}/>
             <Opt>1</Opt>
         </ListElem>
@@ -62,6 +61,14 @@ ListItem.propTypes = {
     lang: propTypes.string
 };
 
-const CKorean = connect(state => ({display: state.display.kr}))(Korean);
+function extractKorean(id, words) {
+    let korean = words.find( word => word.id === id);
+    return korean && korean.kr || '';
+}
+
+const CKorean = connect(
+    (state, { id }) => ({display: state.display.kr, value: extractKorean(id, state.words)}),
+    (dispatch, { id }) => ({onChange: ({ target }) => dispatch(editKorean(id, target.value))})
+)(Korean);
 
 export default React.memo(ListItem);

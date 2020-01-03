@@ -3,7 +3,7 @@ import styled from "styled-components";
 import propTypes from "prop-types";
 import ListItem from "./ListItem";
 
-const List_ = styled.ul`
+const StyledList = styled.ul`
   list-style: none;
   margin: auto;
   padding: 0;
@@ -12,9 +12,9 @@ const List_ = styled.ul`
 
 function List({ items = [], lang }) {
     return (
-        <List_>
+        <StyledList>
             {items && items.map((item, i) => <ListItem key={i} {...item} />)}
-        </List_>
+        </StyledList>
     );
 }
 

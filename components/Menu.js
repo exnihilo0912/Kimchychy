@@ -1,5 +1,5 @@
 import propTypes from 'prop-types';
-import { Button, Select } from "antd";
+import { Button, Select, Icon } from "antd";
 import styled from "styled-components";
 import {A} from "../Store/Actions";
 import { connect } from 'react-redux';
@@ -10,9 +10,13 @@ const List = styled.ul`
   margin: auto;
   padding: 0;
   display: flex;
+    width: 100%;
+  display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 `;
 const ListItem = styled.li`
-    margin: 0 .2rem;
+    margin: .5rem .25rem;
 `;
 
 const StyledSelect = styled(Select)`
@@ -24,20 +28,22 @@ function Menu({ langs, dispatch }) {
         <nav>
             <List>
                 <ListItem>
-                    <Button onClick={ () => dispatch({type: A.ADD_WORD}) }>Add</Button>
+                    <Button type="primary" size="large" shape="circle" icon="plus" onClick={ () => dispatch({type: A.ADD_WORD}) }/>
                 </ListItem>
                 <ListItem>
-                    <Button onClick={ () => dispatch({type: A.DELETE_ALL_WORD}) }>Remove All</Button>
+                    <Button type="danger" size="large" shape="circle" icon="delete" onClick={ () => dispatch({type: A.DELETE_ALL_WORD}) }/>
                 </ListItem>
                 <ListItem>
-                    <Button onClick={ () => dispatch({type: A.SHOW_KOREAN}) }>Toggle Korean</Button>
+                    <Button shape="circle" size="large" onClick={ () => dispatch({type: A.SHOW_KOREAN}) }>한</Button>
                 </ListItem>
                 <ListItem>
-                    <Button onClick={ () => dispatch({type: A.SHOW_TRANSLATION}) }>Toggle Translation</Button>
+                    <Button shape="circle-outline" size="large" onClick={ () => dispatch({type: A.SHOW_TRANSLATION}) }>A</Button>
                 </ListItem>
-                <StyledSelect defaultValue={langs[0].code} onChange={ value => dispatch({ type: A.CHANGE_LANGUAGE, value })}>
-                    {langs.map( lang => <Option value={lang.code}>{lang.name}</Option>)}
-                </StyledSelect>
+                <ListItem>
+                    <StyledSelect defaultValue={langs[0].code} onChange={ value => dispatch({ type: A.CHANGE_LANGUAGE, value })}>
+                        {langs.map( lang => <Option value={lang.code}>{lang.name}</Option>)}
+                    </StyledSelect>
+                </ListItem>
             </List>
         </nav>
     );

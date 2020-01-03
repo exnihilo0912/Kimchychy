@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import propTypes from "prop-types";
 import { connect } from 'react-redux';
+import { editTranslation } from "../Store/ActionCreators";
 
 const Translation = styled.input`
     border: none;
@@ -17,19 +18,17 @@ const Field = styled.div`
   align-items: center;
 `;
 
-//TODO fix this
 function extractTranslation(translations, lang) {
     let translation = translations.find( trans => trans.code === lang);
     return translation && translation.value || '';
 }
 
-function TranslationField({ id, tl, lang }) {
+function TranslationField({ id, tl }) {
     return (
         <Field>
             <CTranslation
                 id={id}
                 tl={tl}
-                lang={lang}
             />
         </Field>
     );
@@ -38,16 +37,19 @@ function TranslationField({ id, tl, lang }) {
 TranslationField.propTypes = {
     id: propTypes.any.isRequired,
     tl: propTypes.array.isRequired,
-    lang: propTypes.string
 };
 
-function updateWord(value, id, lang, callback) {
-    callback({type: A.UPDATE_WORD_TRANSLATION, id, tl: {lang, value} })
-}
-
 const CTranslation = connect(
-    (state, {id, tl}) => ({ display: state.display.tl, value: extractTranslation(tl, state.lang) }),
-    (dispatch, {id, lang}) => ({ onChange: event => updateWord(event.target.value, id, lang, dispatch )})
+    (state, {tl}) => ({ display: state.display.tl, value: extractTranslation(tl, state.lang), lang: state.lang }),
+    dispatch => ({d: dispatch}),
+    (state, dispatch, own) => ({
+        ...state,
+        ...dispatch,
+        ...own,
+        onChange({ target }) {
+            dispatch.d(editTranslation(own.id, target.value, state.lang));
+        }
+    })
 )(Translation);
 
 export default React.memo(TranslationField);

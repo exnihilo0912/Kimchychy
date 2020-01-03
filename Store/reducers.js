@@ -18,12 +18,24 @@ function words(state = [], action) {
     }
 }
 
+function updateTranslation(id, trans, new_trans) {
+    return new_trans.code === trans.code ? new_trans : trans;
+}
+
 function word(state = {}, action) {
     const {id, kr, tl} = action;
 
     switch (action.type) {
         case A.ADD_WORD:
             return id ? {id, kr, tl} : {id: v4(), kr: '', tl: []};
+        case A.UPDATE_WORD_TRANSLATION:
+            if(id !== state.id)
+                return state;
+            return Object.assign({}, state, {tl: state.tl.map(trans => updateTranslation(id, trans, tl))});
+        case A.UPDATE_WORD_KOREAN:
+            if(id !== state.id)
+                return state;
+            return Object.assign({}, state, { kr: action.kr } );
         default:
             return state;
     }
