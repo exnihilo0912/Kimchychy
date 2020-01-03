@@ -16,4 +16,11 @@ function editKorean(id, value) {
     }
 }
 
-export { editTranslation, editKorean };
+function updateSearch(value) {
+    return {
+        type: A.SEARCH,
+        value
+    }
+}
+
+export { editTranslation, editKorean, updateSearch };

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import propTypes from "prop-types";
 import ListItem from "./ListItem";
+import { connect } from 'react-redux';
 
 const StyledList = styled.ul`
   list-style: none;
@@ -10,10 +11,10 @@ const StyledList = styled.ul`
   width: 20rem;
 `;
 
-function List({ items = [], lang }) {
+function List({ words }) {
     return (
         <StyledList>
-            {items && items.map((item, i) => <ListItem key={i} {...item} />)}
+            {words && words.map((word, i) => <ListItem key={i} {...word} />)}
         </StyledList>
     );
 }
@@ -22,4 +23,10 @@ List.propTypes = {
     items: propTypes.array.isRequired,
 };
 
-export default React.memo(List);
+const CList = connect(
+    state => ({
+        words: !state.search ? state.words : state.words.filter( w => w.tl.find( trans => trans.code === state.lang).value.indexOf(state.search) >= 0)
+    })
+)(List);
+
+export default CList;

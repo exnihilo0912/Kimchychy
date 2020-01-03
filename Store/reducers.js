@@ -68,4 +68,13 @@ function display(state = { kr: true, tl: true }, action) {
     }
 }
 
-export {words, lang, langs, display};
+function search(state = '', action) {
+    switch (action.type) {
+        case A.SEARCH:
+            return action.value;
+        default:
+            return state;
+    }
+}
+
+export {words, lang, langs, display, search};
