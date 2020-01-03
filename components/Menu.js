@@ -40,9 +40,9 @@ function Menu({ langs, dispatch }) {
                     <Button shape="circle-outline" size="large" onClick={ () => dispatch({type: A.SHOW_TRANSLATION}) }>A</Button>
                 </ListItem>
                 <ListItem>
-                    <StyledSelect defaultValue={langs[0].code} onChange={ value => dispatch({ type: A.CHANGE_LANGUAGE, value })}>
-                        {langs.map( lang => <Option value={lang.code}>{lang.name}</Option>)}
-                    </StyledSelect>
+                    <CSelect>
+                        {langs.map( lang => <Option key={lang.code} value={lang.code}>{lang.name}</Option>)}
+                    </CSelect>
                 </ListItem>
             </List>
         </nav>
@@ -54,5 +54,9 @@ Menu.PropTypes = {
 };
 
 const CMenu = connect( state => ({langs: state.langs}) )(Menu);
+const CSelect = connect(
+    state => ({defaultValue: state.lang}),
+    dispatch => ({ onChange: value => dispatch({ type: A.CHANGE_LANGUAGE, value }) })
+)(StyledSelect);
 
 export default CMenu;
