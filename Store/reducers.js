@@ -1,5 +1,6 @@
 import { A } from './Actions';
 import { v4 } from 'uuid';
+import S from '../components/statuses';
 
 function words(state = [], action) {
     switch (action.type) {
@@ -27,7 +28,7 @@ function word(state = {}, action) {
 
     switch (action.type) {
         case A.ADD_WORD:
-            return id ? {id, kr, tl} : {id: v4(), kr: '', tl: []};
+            return id ? {id, kr, tl, status} : {id: v4(), kr: '', tl: [{code: 'en-us', value: ''}, {code: 'fr-fr', value: ''}], status: S.UNKNOWN};
         case A.UPDATE_WORD_TRANSLATION:
             if(id !== state.id)
                 return state;
