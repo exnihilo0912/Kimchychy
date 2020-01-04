@@ -3,7 +3,8 @@ import styled from "styled-components";
 import propTypes from "prop-types";
 import TranslationField from './TranslationField';
 import { connect } from 'react-redux';
-import { editKorean } from "../Store/ActionCreators";
+import { editKorean, updateStatus } from "../Store/ActionCreators";
+import ItemStatus from "./ItemStatus";
 import {Icon} from 'antd';
 
 const ListElem = styled.li`
@@ -38,20 +39,13 @@ const Korean = styled.input`
   visibility: ${props => props.display ? 'visible' : 'hidden'};
 `;
 
-const Opt = styled.div`
-  grid-area: plus;
-  display: flex;
-  align-items: center;
-  color: dodgerblue;
-`;
-
-function ListItem({ id, kr, tl = [] }) {
+function ListItem({ id, kr, tl = [], status }) {
     return (
-        <ListElem>
+        <CListElem id={id} status={status}>
             <CKorean id={id}/>
             <TranslationField id={id} tl={tl}/>
-            <Opt>1</Opt>
-        </ListElem>
+            <ItemStatus status={status}/>
+        </CListElem>
     );
 }
 
@@ -70,5 +64,10 @@ const CKorean = connect(
     (state, { id }) => ({display: state.display.kr, value: extractKorean(id, state.words)}),
     (dispatch, { id }) => ({onChange: ({ target }) => dispatch(editKorean(id, target.value))})
 )(Korean);
+
+const CListElem = connect(
+    null,
+    (dispatch, { id, status }) => ({ onDoubleClick: () => dispatch(updateStatus(id, status)) })
+)(ListElem);
 
 export default React.memo(ListItem);

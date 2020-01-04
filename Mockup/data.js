@@ -5,7 +5,8 @@ const dictionnary = [
         tl: [
             { code: "en-us", value: "to see" },
             { code: "fr-fr", value: "voir" }
-        ]
+        ],
+        status: 'LEARNED'
     },
     {
         id: 1,
@@ -13,7 +14,8 @@ const dictionnary = [
         tl: [
             { code: "en-us", value: "to go" },
             { code: "fr-fr", value: "aller" }
-        ]
+        ],
+        status: 'UNKNOWN'
     },
     {
         id: 2,
@@ -21,7 +23,8 @@ const dictionnary = [
         tl: [
             { code: "en-us", value: "to sleep" },
             { code: "fr-fr", value: "dormir" }
-        ]
+        ],
+        status: 'UNKNOWN'
     }
 ];
 

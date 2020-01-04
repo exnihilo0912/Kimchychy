@@ -10,8 +10,8 @@ function words(state = [], action) {
         case A.DELETE_ALL_WORD:
             return [];
         case A.UPDATE_WORD_KOREAN:
-            return state.map(w => word(w, action));
         case A.UPDATE_WORD_TRANSLATION:
+        case A.UPDATE_WORD_STATUS:
             return state.map(w => word(w, action));
         default:
             return state;
@@ -23,7 +23,7 @@ function updateTranslation(id, trans, new_trans) {
 }
 
 function word(state = {}, action) {
-    const {id, kr, tl} = action;
+    const {id, kr, tl, status} = action;
 
     switch (action.type) {
         case A.ADD_WORD:
@@ -35,7 +35,11 @@ function word(state = {}, action) {
         case A.UPDATE_WORD_KOREAN:
             if(id !== state.id)
                 return state;
-            return Object.assign({}, state, { kr: action.kr } );
+            return Object.assign({}, state, { kr } );
+        case A.UPDATE_WORD_STATUS:
+            if(id !== state.id)
+                return state;
+            return Object.assign({}, state, { status });
         default:
             return state;
     }
@@ -69,7 +73,7 @@ function display(state = { kr: true, tl: true }, action) {
 }
 
 function search(state = '', action) {
-    switch (action.type) {
+    switch(action.type) {
         case A.SEARCH:
             return action.value;
         default:
