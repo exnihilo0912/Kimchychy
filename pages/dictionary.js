@@ -7,6 +7,7 @@ import { dictionnary, languages } from '../Mockup/data';
 import Menu from '../components/Menu';
 import { words, langs, lang, display, search } from '../Store/reducers';
 import Search from '../components/Search';
+import Layout from '../components/Layout';
 import { initStorage, updateStorage} from "../Store/LocalStorage";
 
 import styled from 'styled-components';
@@ -36,12 +37,14 @@ export default class Dictionary extends React.Component{
     render() {
         return (
             <Provider store={store}>
-                <Wrapper>
-                    <h1>Dictionnary</h1>
-                    <Search/>
-                    <Menu dispatch={store.dispatch} />
-                    <List/>
-                </Wrapper>
+                <Layout>
+                    <Wrapper>
+                        <h1>Dictionnary</h1>
+                        <Search/>
+                        <Menu dispatch={store.dispatch} />
+                        <List/>
+                    </Wrapper>
+                </Layout>
             </Provider>
         );
     }
