@@ -11,8 +11,9 @@ const ListElem = styled.li`
   display: grid;
     grid-template-columns: 0.9fr 0.1fr;
     grid-template-areas: "title plus" "subtitle plus";
-  border: 1px solid #e1e1e1;
+  border: 1px solid transparent;
     border-radius: 10px;
+  box-shadow: 0 3px 4px hsla(0, 0%, 0%, .15);
   padding: 1rem 1rem 1rem 3rem;
   margin: 1rem 0;
   background-color: white;
