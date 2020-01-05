@@ -37,6 +37,7 @@ const Korean = styled.input`
   font-weight: bold;
   font-size: 1rem;
   visibility: ${props => props.display ? 'visible' : 'hidden'};
+  outline: none;
 `;
 
 function ListItem({ id, kr, tl = [], status }) {

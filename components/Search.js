@@ -10,10 +10,14 @@ const StyledInput = styled(Input)`
       height: 2.8rem;
     font-size: 1.5rem;
       line-height: 2rem;
+    border: none;
+        border-bottom: 1px solid #c1c1c1;
+    background-color: transparent;
+    outline: none;
 `;
 
 function Search(props) {
-    return   <CSearch {...props}/>
+    return   <CSearch {...props} placeholder="Search..."/>
 }
 
 Search.propTypes = {

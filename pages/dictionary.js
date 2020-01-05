@@ -20,7 +20,7 @@ const store = createStore(
 
 
 const Wrapper = styled.section`
-  padding: 2rem;
+
 `;
 
 store.subscribe( () => updateStorage(STORAGE_NAME, store.getState()));
@@ -39,7 +39,6 @@ export default class Dictionary extends React.Component{
             <Provider store={store}>
                 <Layout>
                     <Wrapper>
-                        <h1>Dictionnary</h1>
                         <Search/>
                         <Menu dispatch={store.dispatch} />
                         <List/>

@@ -12,6 +12,7 @@ const Translation = styled.input`
     font-size: 1rem;
     width: auto;
     visibility: ${props => props.display ? 'visible' : 'hidden'};
+    outline: none;
 `;
 const Field = styled.div`
   display: flex;
