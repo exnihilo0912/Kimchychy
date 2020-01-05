@@ -28,7 +28,11 @@ function Menu({ langs, dispatch }) {
         <nav>
             <List>
                 <ListItem>
-                    <Button type="primary" size="large" shape="circle" icon="plus" onClick={ () => dispatch({type: A.ADD_WORD}) }/>
+                    <Button type="primary" size="large" shape="circle" icon="plus" onClick={ () => {
+                        dispatch({type: A.ADD_WORD});
+                        setTimeout(() => window.scrollTo(0,document.body.scrollHeight), 250);
+                    }
+                    }/>
                 </ListItem>
                 <ListItem>
                     <Button type="danger" size="large" shape="circle" icon="delete" onClick={ () => dispatch({type: A.DELETE_ALL_WORD}) }/>

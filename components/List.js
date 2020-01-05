@@ -14,13 +14,15 @@ const StyledList = styled.ul`
 function List({ words }) {
     return (
         <StyledList>
-            {words && words.map((word, i) => <ListItem key={i} {...word} />)}
+            {words && words.map((word, i) =>
+                <ListItem key={i} {...word} />
+            )}
         </StyledList>
     );
 }
 
 List.propTypes = {
-    items: propTypes.array.isRequired,
+    words: propTypes.array.isRequired,
 };
 
 const CList = connect(

@@ -52,6 +52,7 @@ function ListItem({ id, kr, tl = [], status }) {
 }
 
 ListItem.propTypes = {
+    id: propTypes.string.isRequired,
     kr: propTypes.string.isRequired,
     tl: propTypes.array.isRequired,
     lang: propTypes.string
@@ -59,7 +60,7 @@ ListItem.propTypes = {
 
 function extractKorean(id, words) {
     let korean = words.find( word => word.id === id);
-    return korean && korean.kr || '';
+    return korean && korean.kr || '?';
 }
 
 const CKorean = connect(
