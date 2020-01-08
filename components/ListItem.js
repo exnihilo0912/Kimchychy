@@ -44,7 +44,7 @@ const Korean = styled.input`
 function ListItem({ id, kr, tl = [], status }) {
     return (
         <CListElem id={id} status={status}>
-            <CKorean id={id}/>
+            <CKorean id={id} placeholder="Korean..."/>
             <TranslationField id={id} tl={tl}/>
             <ItemStatus status={status}/>
         </CListElem>
@@ -60,7 +60,7 @@ ListItem.propTypes = {
 
 function extractKorean(id, words) {
     let korean = words.find( word => word.id === id);
-    return korean && korean.kr || '?';
+    return korean && korean.kr || '';
 }
 
 const CKorean = connect(

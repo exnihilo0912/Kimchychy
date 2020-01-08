@@ -27,10 +27,7 @@ function extractTranslation(translations, lang) {
 function TranslationField({ id, tl }) {
     return (
         <Field>
-            <CTranslation
-                id={id}
-                tl={tl}
-            />
+            <CTranslation id={id} tl={tl} placeholder="Translation..."/>
         </Field>
     );
 }

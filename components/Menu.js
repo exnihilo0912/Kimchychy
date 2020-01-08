@@ -14,6 +14,7 @@ const List = styled.ul`
   display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    align-items: center;
 `;
 const ListItem = styled.li`
     margin: .5rem .25rem;

@@ -20,7 +20,7 @@ function editKorean(id, value) {
 function updateSearch(value) {
     return {
         type: A.SEARCH,
-        value
+        value: value.toLowerCase()
     }
 }
 
