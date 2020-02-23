@@ -20,7 +20,17 @@ const store = createStore(
 
 
 const Wrapper = styled.section`
+    padding-bottom: 4rem;
+`;
 
+const FixedContainer = styled.section`
+    position: fixed;
+    max-height: 4rem;
+    bottom: 0;
+    background-color: white;
+    border-top: 1px solid #c1c1c1;
+    width: 100vw;
+    left: 0;
 `;
 
 store.subscribe( () => updateStorage(STORAGE_NAME, store.getState()));
@@ -40,8 +50,10 @@ export default class Dictionary extends React.Component{
                 <Layout>
                     <Wrapper>
                         <Search/>
-                        <Menu dispatch={store.dispatch} />
                         <List/>
+                        <FixedContainer>
+                            <Menu dispatch={store.dispatch} />
+                        </FixedContainer>
                     </Wrapper>
                 </Layout>
             </Provider>
